@@ -2,13 +2,14 @@
   <v-app id="inspire">
 <!-- PLAYER DIV -->
     <v-navigation-drawer
-     
       app
       clipped
-      :width = "600"
+      fixed
+      :width = "500"
+      permanent
     >
 
-    <youtube :video-id="videoId" :player-vars="playerVars" @playing="playing" style="width: 100%;"></youtube>
+      <Player></Player>
 
     </v-navigation-drawer>
 <!-- <? PLAYER DIV -->
@@ -16,13 +17,16 @@
     <v-app-bar
       app
       clipped-left
-      color="red"
+      color="deep-purple lighten-2"
       dense
+      fixed
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-icon class="mx-4">fab fa-youtube</v-icon>
+      <v-avatar size="42px" tile>
+        <img src="@/assets/ARMUSIC_LOGO.png" alt="Vuetify">
+      </v-avatar>
+      
       <v-toolbar-title class="mr-12 align-center">
-        <span class="title">Music Player App <small>V.0001</small></span>
+        <span class="title"> ARMusic</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-row
@@ -30,24 +34,33 @@
         style="max-width: 650px"
       >
         <v-text-field
-          :append-icon-cb="() => {}"
+          @click:append="search"
           placeholder="Search..."
           single-line
           append-icon="search"
           color="white"
           hide-details
+          v-on:keyup.enter="search"
+          v-model="search_qs"
         ></v-text-field>
       </v-row>
     </v-app-bar>
 
 <!-- CENTER CONTENT -->
     <v-content>
-      <v-container class="">
-        <v-row>
-          <v-col class="">
-            <h1>HELLO WORLD</h1>
-          </v-col>
-        </v-row>
+      <v-container grid-list-lg fill-height>
+        <v-layout justify-left row wrap>
+          <v-flex lg12>
+            <v-fade-transition mode="out-in">
+                <router-view></router-view>
+            </v-fade-transition>
+          </v-flex>
+          <back-to-top bottom="35px" right="5px" visibleoffset="300">
+            <v-btn class="mx-2" fab dark small color="deep-purple" title="Up">
+                <v-icon dark>mdi-chevron-up-circle-outline</v-icon>
+            </v-btn>
+          </back-to-top>
+        </v-layout>
       </v-container>
     </v-content>
 <!-- </ CENTER CONTENT -->
@@ -56,20 +69,20 @@
 </template>
 
 <script>
+
+  import Player from '@/components/Player.vue'
+
   export default {
-    props: {
-      source: String,
+    components: {
+      Player
     },
     data: () => ({
-      drawer: null,
-      videoId: 'xKk655CDFn8',
-      playerVars: {
-        autoplay: 1
-      }
+      search_qs: ''
     }),
     methods: {
-      playing() {
-        console.log('\o/ we are watching!!!')
+      search() {
+        const qs = this.search_qs
+        if(qs != '') this.$router.push({ path: `/search/${qs}` })
       }
     },
     created () {
@@ -77,3 +90,32 @@
     },
   }
 </script>
+<style> 
+
+    body::-webkit-scrollbar, .v-navigation-drawer[data-booted=true]::-webkit-scrollbar {
+      width: 10px;
+      background-color: #F5F5F5;
+    }
+
+    body::-webkit-scrollbar-track, .v-navigation-drawer[data-booted=true]::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+      border-radius: 8px;
+      background-color: #F5F5F5;
+    }
+
+    body::-webkit-scrollbar-thumb, .v-navigation-drawer[data-booted=true]::-webkit-scrollbar-thumb  {
+      border-radius: 8px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+      background-color: #555;
+    }
+
+    .btn-to-top {
+      width: 60px;
+      height: 60px;
+      padding: 10px 16px;
+      border-radius: 50%;
+      font-size: 22px;
+      line-height: 22px;
+    }
+    
+</style>
