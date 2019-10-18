@@ -1,12 +1,22 @@
 <template>
   <div class="home">
-    <h1>HELLO WORLD!</h1>
+    <img src="~@/assets/ARMUSIC_LOGO.png" alt="">
   </div>
 </template>
 
 <script>
-
-export default {
-  name: 'home'
-}
+  export default {
+    
+  }
 </script>
+
+<style lang="scss" scoped>
+.home {
+  text-align: center;
+}
+.home img{
+  width: 50%;
+  height: 100%;
+  opacity: 0.4;
+}
+</style>

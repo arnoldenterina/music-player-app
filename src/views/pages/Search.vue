@@ -93,7 +93,6 @@
             ytSearch(search, page){
                 this.isloading = true
                 Axios.get('http://127.0.0.1/yt.php?q='+this.search+'&p='+page).then(({data}) =>{
-                    console.log(data)
                     this.items = this.items.concat(data.video)
                     this.isloading = false
                 }).catch(e => {
@@ -111,7 +110,26 @@
                 return "https://i.ytimg.com/vi/"+id+"/sddefault.jpg";
             },
             addToPlaylist(row){
-                console.log(row)
+                this.$store.dispatch('checkIfExistinPlaylist', row)
+
+                if(this.$store.getters.getIfinTrack){
+                    this.$toasted.show("Already in the list!", { 
+                        theme: "toasted-primary",
+                        type: "error",
+                        position: "top-right", 
+                        duration : 2000,
+                        icon: 'bug_report'
+                    });
+                }else{
+                    this.$store.dispatch('addToPlaylist', row)
+                    this.$toasted.show("Added to playlist!", { 
+                        theme: "toasted-primary",
+                        type: "success",
+                        position: "top-right", 
+                        duration : 2000,
+                        icon: 'check'
+                    });
+                }
             }
         }
     }
