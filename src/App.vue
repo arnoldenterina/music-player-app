@@ -21,10 +21,11 @@
       dense
       fixed
     >
-      <v-avatar size="42px" tile>
-        <img src="@/assets/ARMUSIC_LOGO.png" alt="Vuetify">
-      </v-avatar>
-      
+      <router-link to="/">
+        <v-avatar size="42px" tile>
+          <img src="@/assets/ARMUSIC_LOGO.png" alt="Vuetify">
+        </v-avatar>
+      </router-link>
       <v-toolbar-title class="mr-12 align-center">
         <span class="title"> ARMusic</span>
       </v-toolbar-title>

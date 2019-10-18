@@ -1,7 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VuexPersist from 'vuex-persist'
 
 Vue.use(Vuex)
+
+const vuexPersist = new VuexPersist({
+    key: 'armusicapp-key',
+    storage: window.localStorage
+})
 
 export default new Vuex.Store({
     state: {
@@ -37,5 +43,6 @@ export default new Vuex.Store({
     getters: {
         get_play_list: state => state.playList,
         getIfinTrack: state => state.isInCurrentTrack
-    }
+    },
+    plugins: [vuexPersist.plugin]
 })

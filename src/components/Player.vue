@@ -63,6 +63,12 @@
                 return this.$store.state.playList
             }
         },
+        mounted(){
+            if(this.playlist.length > 0 && this.tmpVidID){
+                this.videoId = this.playlist[0].encrypted_id
+                this.tmpVidID = false
+            }
+        },
         methods: {
             playing() {
                 // console.log('\o/ we are watching!!!')

@@ -92,7 +92,7 @@
             },
             ytSearch(search, page){
                 this.isloading = true
-                Axios.get('http://127.0.0.1/yt.php?q='+this.search+'&p='+page).then(({data}) =>{
+                Axios.get('/yt.php?q='+this.search+'&p='+page).then(({data}) =>{
                     this.items = this.items.concat(data.video)
                     this.isloading = false
                 }).catch(e => {
