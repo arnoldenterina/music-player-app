@@ -20,7 +20,7 @@
         </div>
 
         <div class="gfg">
-            <v-list-item two-line v-for="(row, idx) in playlist" :key="idx">
+            <v-list-item two-line v-for="(row, idx) in playlist" :key="idx" v-dragging="{ item: row, list: playlist, group: 'playlist' }">
                 <v-list-item-content>
                     <v-list-item-title>{{row.title}}</v-list-item-title>
                     <v-list-item-subtitle>{{row.author}}</v-list-item-subtitle>
@@ -68,6 +68,10 @@
                 this.videoId = this.playlist[0].encrypted_id
                 this.tmpVidID = false
             }
+
+            this.$dragging.$on('dragged', ({ value }) => {
+                this.$store.dispatch('updatePlaylistByDragz', value.list)
+            })
         },
         methods: {
             playing() {
@@ -183,5 +187,8 @@
 </script>
 
 <style scoped>
-
+.gfg .v-list-item:hover {
+    cursor: grab;
+    background-color: #9e61d5;
+}
 </style>

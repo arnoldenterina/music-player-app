@@ -8,6 +8,7 @@ import VueYoutube from 'vue-youtube'
 import axios from 'axios'
 import Toasted from 'vue-toasted'
 import CripVueLoading from "crip-vue-loading"
+import VueDND from 'awe-dnd'
 
 window.Axios = axios
 
@@ -18,6 +19,8 @@ Vue.use(Toasted)
 Vue.use(VueYoutube)
 
 Vue.use(BackToTop)
+
+Vue.use(VueDND)
 
 Vue.config.productionTip = false
 

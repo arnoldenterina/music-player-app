@@ -27,6 +27,9 @@ export default new Vuex.Store({
         },
         remove_this_track(state, data){
             state.playList.splice(data, 1)
+        },
+        update_playlist_by_drag(state, data){
+            state.playList = data
         }
     },
     actions: {
@@ -38,6 +41,9 @@ export default new Vuex.Store({
         },
         removeThisTrack({commit}, data){
             commit('remove_this_track', data)
+        },
+        updatePlaylistByDragz({commit}, data){
+            commit('update_playlist_by_drag', data)
         }
     },
     getters: {
